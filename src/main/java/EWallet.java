@@ -1,15 +1,15 @@
 public class EWallet {
 
-    private double amount;
+    private double totalAmount;
     private double amountInWallet;
 
-    public EWallet(double amount, double amountInWallet){
-        this.amount = amount;
+    public EWallet(double totalAmount, double amountInWallet){
+        this.totalAmount = totalAmount;
         this.amountInWallet = amountInWallet;
     }
 
     public double getAmount() {
-        return amount;
+        return totalAmount;
     }
 
     public double getAmountInWallet() {

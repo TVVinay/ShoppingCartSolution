@@ -1,21 +1,19 @@
-import java.util.List;
-
-public class Product {
+public class Cart {
 
 
-    private String name;
+    private Products name;
     private double price;
     private int quantity;
     private double subtotal;
 
-    public Product(String name, double price, int quantity){
+    public Cart(Products name, double price, int quantity){
         this.name = name;
         this.price = price;
         this.quantity = quantity;
         subtotal = price * quantity;
     }
 
-    public String getName() {
+    public Products getName() {
         return name;
     }
 
