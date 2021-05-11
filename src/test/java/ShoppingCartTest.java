@@ -45,24 +45,16 @@ public class ShoppingCartTest {
 
         Shop shop = new Shop();
         Item item = new Item(Product.Apple,100,5);
-        System.out.println(item.getName()+" : "+ item.getSubtotal());
-        Assert.assertEquals(item.getSubtotal(),500.0);
         shop.addProductInCart(item);
 
         Item item1 = new Item(Product.Milk,42,3);
-        System.out.println(item1.getName()+" : "+ item1.getSubtotal());
-        Assert.assertEquals(item1.getSubtotal(),126.0);
         shop.addProductInCart(item1);
 
         Item item2 = new Item(Product.Newspaper,5,5);
-        System.out.println(item2.getName()+" : "+ item2.getSubtotal());
-        Assert.assertEquals(item2.getSubtotal(),25.0);
         shop.addProductInCart(item2);
 
         double totalAmount = shop.getProductsTotalAmount();
-
         System.out.println("Total Amount Payble is : "+totalAmount);
-
         Assert.assertEquals(totalAmount,651.0);
 
     }
@@ -72,27 +64,19 @@ public class ShoppingCartTest {
 
         Shop shop = new Shop();
         Item item = new Item(Product.Apple,100,5);
-        System.out.println(item.getName()+" : "+ item.getSubtotal());
-        Assert.assertEquals(item.getSubtotal(),500.0);
         shop.addProductInCart(item);
 
         Item item1 = new Item(Product.Milk,42,3);
-        System.out.println(item1.getName()+" : "+ item1.getSubtotal());
-        Assert.assertEquals(item1.getSubtotal(),126.0);
         shop.addProductInCart(item1);
 
         Item item2 = new Item(Product.Newspaper,5,5);
-        System.out.println(item2.getName()+" : "+ item2.getSubtotal());
-        Assert.assertEquals(item2.getSubtotal(),25.0);
         shop.addProductInCart(item2);
 
         double totalAmount = shop.getProductsTotalAmount();
-
         System.out.println("Total Amount Payble is : "+totalAmount);
-
         Assert.assertEquals(totalAmount,651.0);
 
-         EWallet eWallet =  new EWallet(totalAmount, 400);
+        EWallet eWallet =  new EWallet(totalAmount, 400);
 
         boolean paymentStatus = eWallet.getPaymentStatus();
         System.out.println("Payment Status from eWallet is : " + paymentStatus);
