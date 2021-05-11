@@ -25,5 +25,15 @@ public class EWallet {
         return false;
     }
 
+    public void getPaymentReceipt(){
+        if(getPaymentStatus()){
+            System.out.println("Paid, Successfully from you EWallet");
+        }
+        else
+            System.out.println("Insufficient Amount!! Please load you Wallet with balance");
+    }
+
+
+
 
 }

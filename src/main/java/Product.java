@@ -1,4 +1,4 @@
-public enum Products {
+public enum Product {
     Apple,
     Milk,
     Newspaper
