@@ -3,7 +3,7 @@ import org.testng.annotations.Test;
 
 public class ShoppingCartTest {
 
-    @Test(testName = "Verify Item Availibilty")
+    @Test
     public void verifyItemAvailablilty(){
         Shop shop = new Shop();
         Apple apple = new Apple("Fresh Apple",1,100);
@@ -29,7 +29,7 @@ public class ShoppingCartTest {
 
     }
 
-    @Test(testName = "Verify Subtotal Amount")
+    @Test
     public void verifySubtotalforEachItem(){
 
         Apple apple = new Apple("Fresh Apple",1,100);
@@ -46,7 +46,7 @@ public class ShoppingCartTest {
 
     }
 
-    @Test(testName = "Verify Total Amount")
+    @Test
     public void verifyTotalAmount(){
 
         Shop shop = new Shop();
@@ -65,7 +65,7 @@ public class ShoppingCartTest {
 
     }
 
-    @Test(testName = "verify payment status")
+    @Test
     public void verifyPaymentStatusViaEWallet(){
 
         Shop shop = new Shop();
