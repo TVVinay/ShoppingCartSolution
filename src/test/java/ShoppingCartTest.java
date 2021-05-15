@@ -1,29 +1,36 @@
 import org.testng.Assert;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 public class ShoppingCartTest {
 
+    EWallet wallet ;
+    @BeforeTest
+    public void intialize(){
+        wallet = new EWallet(500);
+    }
+
     @Test
     public void verifyItemAvailablilty(){
-        Shop shop = new Shop();
-        Apple apple = new Apple("Fresh Apple",1,100);
-        shop.addProductInCart(apple);
-
-        boolean checkItemAvailabilty = shop.checkItemsAvailable("Fresh Apple");
+        ShoppingCart shoppingCart = new ShoppingCart();
+        Customer customer = new Customer(wallet);
+        Apple apple = new Apple("Fresh Apple",7,100);
+        customer.addToCart(apple);
+        boolean checkItemAvailabilty = shoppingCart.checkItemsAvailable("Fresh apple");
         System.out.println("Item available ? "+checkItemAvailabilty);
         Assert.assertEquals(checkItemAvailabilty,true);
 
 
         Milk milk = new Milk("Pasteurized Milk",45,10);
-        shop.addProductInCart(milk);
-        boolean checkItemAvailabilty1 = shop.checkItemsAvailable("Pasteurized Milk");
+        customer.addToCart(milk);
+        boolean checkItemAvailabilty1 = shoppingCart.checkItemsAvailable("Pasteurized Milk");
         System.out.println("Item available ? "+checkItemAvailabilty1);
         Assert.assertEquals(checkItemAvailabilty1,false);
 
 
        Newspaper newspaper = new Newspaper("English Newspaper","English",5,5);
-        shop.addProductInCart(newspaper);
-        boolean checkItemAvailabilty2=shop.checkItemsAvailable("English Newspaper");
+        customer.addToCart(newspaper);
+        boolean checkItemAvailabilty2=shoppingCart.checkItemsAvailable("English Newspaper");
         System.out.println("Item available ? "+checkItemAvailabilty2);
         Assert.assertEquals(checkItemAvailabilty2,false);
 
@@ -32,34 +39,38 @@ public class ShoppingCartTest {
     @Test
     public void verifySubtotalforEachItem(){
 
-        Apple apple = new Apple("Fresh Apple",1,100);
-        System.out.println(apple.getProductName()+" : "+ apple.getSubTotal());
-        Assert.assertEquals(apple.getSubTotal(),100.0);
+        ShoppingCart shoppingCart = new ShoppingCart();
+        Customer customer = new Customer(wallet);
+        Apple apple = new Apple("Fresh Apple",3,100);
+        customer.addToCart(apple);
+        System.out.println(shoppingCart.getSubTotal(apple));
 
         Milk milk = new Milk("Pasteurized Milk",45,10);
-        System.out.println(milk.getProductName()+" : "+ milk.getSubTotal());
-        Assert.assertEquals(milk.getSubTotal(),450);
+        customer.addToCart(milk);
+        System.out.println(shoppingCart.getSubTotal(milk));
 
         Newspaper newspaper = new Newspaper("English Newspaper","English",5,5);
-        System.out.println(newspaper.getProductName()+" : "+ newspaper.getSubTotal() + " Language : "+newspaper.getLanguage());
-        Assert.assertEquals(newspaper.getSubTotal(),26.0);
+        customer.addToCart(newspaper);
+        System.out.println(shoppingCart.getSubTotal(newspaper));
 
     }
 
     @Test
     public void verifyTotalAmount(){
 
-        Shop shop = new Shop();
+        ShoppingCart shoppingCart = new ShoppingCart();
+        Customer customer = new Customer(wallet);
+
         Apple apple = new Apple("Fresh Apple",1,100);
-        shop.addProductInCart(apple);
+        customer.addToCart(apple);
 
         Milk milk = new Milk("Pasteurized Milk",45,10);
-        shop.addProductInCart(milk);
+        customer.addToCart(milk);
 
         Newspaper newspaper = new Newspaper("English Newspaper","English",5,5);
-        shop.addProductInCart(newspaper);
+        customer.addToCart(newspaper);
 
-        double totalAmount = shop.getProductsTotalAmount();
+        double totalAmount = shoppingCart.getTotalAmount();
         System.out.println("Total Amount Payble is : "+totalAmount);
         Assert.assertEquals(totalAmount,575.0);
 
@@ -68,35 +79,34 @@ public class ShoppingCartTest {
     @Test
     public void verifyPaymentStatusViaEWallet(){
 
-        Shop shop = new Shop();
+        Customer customer = new Customer(wallet);
+        ShoppingCart shoppingCart = new ShoppingCart();
         Apple apple = new Apple("Fresh Apple",1,100);
-        shop.addProductInCart(apple);
+        customer.addToCart(apple);
+
 
         Milk milk = new Milk("Pasteurized Milk",45,10);
-        shop.addProductInCart(milk);
+        customer.addToCart(milk);
 
         Newspaper newspaper = new Newspaper("English Newspaper","English",5,5);
-        shop.addProductInCart(newspaper);
+        customer.addToCart(newspaper);
 
-        double totalAmount = shop.getProductsTotalAmount();
+        double totalAmount = shoppingCart.getTotalAmount();
         System.out.println("Total Amount Payble is : "+totalAmount);
 
-        EWalletCustomer eWallet =  new EWalletCustomer(322);
-
-        boolean paymentStatus = shop.getPaymentStatus(eWallet.getWalletBalance());
+        boolean paymentStatus = shoppingCart.getPaymentStatus(customer.getWalletBalance(),totalAmount);
+        wallet.deductAmount(totalAmount);
         System.out.println("Payment Status from eWallet is : " + paymentStatus);
 
-       Assert.assertEquals(paymentStatus,false);
-
+      // Assert.assertEquals(paymentStatus,false);
 
     }
 
     @Test
     public void verifyAddWalletBalance(){
-        EWalletCustomer eWalletCustomer = new EWalletCustomer(4000);
-        eWalletCustomer.addWalletBalance(200);
-        System.out.println("Balance in the Wallet after loading the amount : "+eWalletCustomer.getWalletBalance());
-
+        Customer customer = new Customer(wallet);
+        customer.addWalletBalance(500);
+        System.out.println("Balance in the Wallet after loading the amount : "+ customer.getWalletBalance());
     }
 
 }

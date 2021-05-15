@@ -11,7 +11,6 @@ public class Newspaper implements IProduct {
         this.language = language;
         this.price = price;
         this.quantity = quantity;
-        subTotalNewsPaper = price * quantity;
     }
 
     public String getLanguage() {
@@ -29,10 +28,6 @@ public class Newspaper implements IProduct {
         return price;
     }
 
-    @Override
-    public double getSubTotal() {
-        return subTotalNewsPaper;
-    }
 
     @Override
     public String getProductName() {

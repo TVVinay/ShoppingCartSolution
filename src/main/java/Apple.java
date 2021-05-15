@@ -10,7 +10,6 @@ public class Apple implements IProduct {
         this.name = name;
         this.quantity = quantity;
         this.amount = amount;
-        subTotal = amount * quantity;
     }
 
 
@@ -23,11 +22,6 @@ public class Apple implements IProduct {
     @Override
     public double getPrice() {
         return amount;
-    }
-
-    @Override
-    public double getSubTotal() {
-        return subTotal;
     }
 
     @Override

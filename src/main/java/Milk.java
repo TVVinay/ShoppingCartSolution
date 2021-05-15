@@ -10,7 +10,6 @@ public class Milk implements IProduct {
        this.name = name;
         this.price = price;
         this.quantity = quantity;
-        subTotalMilk = price * quantity;
     }
 
 
@@ -24,10 +23,6 @@ public class Milk implements IProduct {
         return price;
     }
 
-    @Override
-    public double getSubTotal() {
-        return subTotalMilk;
-    }
 
     @Override
     public String getProductName() {
