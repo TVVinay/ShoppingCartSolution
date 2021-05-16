@@ -12,19 +12,23 @@ public class EWallet implements IEWallet{
     }
 
     @Override
-    public double addWalletBalance(double loadBalance) {
-        return balance+=loadBalance;
+    public void addWalletBalance(double loadBalance) {
+        balance += loadBalance;
     }
 
     @Override
-    public double deductAmount(double amount) {
+    public void deductAmount(double amount) {
        if(balance>amount){
-           return this.balance-=amount;
+           this.balance -= amount;
        }
        else {
            System.out.println("InSuffucient balance!!! Please load you Wallet");
        }
-        return 0;
+    }
+
+    public boolean getPaymentStatus(double totalAmount){
+        return getWalletBalance() > totalAmount;
+
     }
 }
 

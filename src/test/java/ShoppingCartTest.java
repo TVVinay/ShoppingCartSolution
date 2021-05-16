@@ -14,23 +14,22 @@ public class ShoppingCartTest {
     public void verifyItemAvailablilty(){
         ShoppingCart shoppingCart = new ShoppingCart();
         Customer customer = new Customer(wallet);
-        Apple apple = new Apple("Fresh Apple",7,100);
+        Apple apple = new Apple("Apple", Apple.Categories.FreshApple,7,100);
         customer.addToCart(apple);
-        boolean checkItemAvailabilty = shoppingCart.checkItemsAvailable("Fresh apple");
+        boolean checkItemAvailabilty = shoppingCart.isItemAvailable(apple.getName());
         System.out.println("Item available ? "+checkItemAvailabilty);
-        Assert.assertEquals(checkItemAvailabilty,true);
+        Assert.assertEquals(checkItemAvailabilty,false);
 
 
-        Milk milk = new Milk("Pasteurized Milk",45,10);
+        Milk milk = new Milk("Milk", Milk.Categories.CreamedMilk,45,10);
         customer.addToCart(milk);
-        boolean checkItemAvailabilty1 = shoppingCart.checkItemsAvailable("Pasteurized Milk");
+        boolean checkItemAvailabilty1 = shoppingCart.isItemAvailable(milk.getName());
         System.out.println("Item available ? "+checkItemAvailabilty1);
         Assert.assertEquals(checkItemAvailabilty1,false);
 
-
-       Newspaper newspaper = new Newspaper("English Newspaper","English",5,5);
+        Newspaper newspaper = new Newspaper("Newspaper", Newspaper.Categories.HindiNewspaper,5,5);
         customer.addToCart(newspaper);
-        boolean checkItemAvailabilty2=shoppingCart.checkItemsAvailable("English Newspaper");
+        boolean checkItemAvailabilty2=shoppingCart.isItemAvailable(newspaper.getName());
         System.out.println("Item available ? "+checkItemAvailabilty2);
         Assert.assertEquals(checkItemAvailabilty2,false);
 
@@ -41,15 +40,15 @@ public class ShoppingCartTest {
 
         ShoppingCart shoppingCart = new ShoppingCart();
         Customer customer = new Customer(wallet);
-        Apple apple = new Apple("Fresh Apple",3,100);
+        Apple apple = new Apple("Apple", Apple.Categories.RedApple,3,100);
         customer.addToCart(apple);
         System.out.println(shoppingCart.getSubTotal(apple));
 
-        Milk milk = new Milk("Pasteurized Milk",45,10);
+        Milk milk = new Milk("Milk", Milk.Categories.PasteurizedMilk,45,10);
         customer.addToCart(milk);
         System.out.println(shoppingCart.getSubTotal(milk));
 
-        Newspaper newspaper = new Newspaper("English Newspaper","English",5,5);
+        Newspaper newspaper = new Newspaper("Newspaper", Newspaper.Categories.EnglishNewspaper,5,5);
         customer.addToCart(newspaper);
         System.out.println(shoppingCart.getSubTotal(newspaper));
 
@@ -61,13 +60,13 @@ public class ShoppingCartTest {
         ShoppingCart shoppingCart = new ShoppingCart();
         Customer customer = new Customer(wallet);
 
-        Apple apple = new Apple("Fresh Apple",1,100);
+        Apple apple = new Apple("Apple", Apple.Categories.FreshApple,1,100);
         customer.addToCart(apple);
 
-        Milk milk = new Milk("Pasteurized Milk",45,10);
+        Milk milk = new Milk("Milk", Milk.Categories.PasteurizedMilk,45,10);
         customer.addToCart(milk);
 
-        Newspaper newspaper = new Newspaper("English Newspaper","English",5,5);
+        Newspaper newspaper = new Newspaper("Newspaper", Newspaper.Categories.EnglishNewspaper,5,5);
         customer.addToCart(newspaper);
 
         double totalAmount = shoppingCart.getTotalAmount();
@@ -81,24 +80,23 @@ public class ShoppingCartTest {
 
         Customer customer = new Customer(wallet);
         ShoppingCart shoppingCart = new ShoppingCart();
-        Apple apple = new Apple("Fresh Apple",1,100);
+        Apple apple = new Apple("Apple", Apple.Categories.FreshApple,1,100);
         customer.addToCart(apple);
 
-
-        Milk milk = new Milk("Pasteurized Milk",45,10);
+        Milk milk = new Milk("Milk", Milk.Categories.PasteurizedMilk,45,10);
         customer.addToCart(milk);
 
-        Newspaper newspaper = new Newspaper("English Newspaper","English",5,5);
+        Newspaper newspaper = new Newspaper("Newspaper", Newspaper.Categories.EnglishNewspaper,5,5);
         customer.addToCart(newspaper);
 
         double totalAmount = shoppingCart.getTotalAmount();
         System.out.println("Total Amount Payble is : "+totalAmount);
 
-        boolean paymentStatus = shoppingCart.getPaymentStatus(customer.getWalletBalance(),totalAmount);
+        boolean paymentStatus = wallet.getPaymentStatus(totalAmount);
         wallet.deductAmount(totalAmount);
         System.out.println("Payment Status from eWallet is : " + paymentStatus);
 
-      // Assert.assertEquals(paymentStatus,false);
+       Assert.assertEquals(paymentStatus,false);
 
     }
 
@@ -107,6 +105,7 @@ public class ShoppingCartTest {
         Customer customer = new Customer(wallet);
         customer.addWalletBalance(500);
         System.out.println("Balance in the Wallet after loading the amount : "+ customer.getWalletBalance());
+        Assert.assertEquals(1000,customer.getWalletBalance());
     }
 
 }

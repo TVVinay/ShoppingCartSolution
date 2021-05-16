@@ -3,17 +3,17 @@ import java.util.List;
 
 public class ShoppingCart {
 
-    private List<IProduct> items;
+    private List<IProduct> products;
     public ShoppingCart(){
-        items = new ArrayList<>();
+        products = new ArrayList<>();
     }
 
     public void addProduct(IProduct product){
-        items.add(product);
+        products.add(product);
     }
 
     public List<IProduct> getProduct(){
-        return items;
+        return products;
     }
 
     public double getSubTotal(IProduct product){
@@ -21,36 +21,20 @@ public class ShoppingCart {
     }
 
     public void removeProduct(IProduct product){
-        items.remove(product);
+        products.remove(product);
     }
 
     public double getTotalAmount(){
-       /* double total = 0;
-        for(IProduct product : items){
-            total+= product.getPrice() * product.getQuantity();
-            return total;
-        }
-        return total;*/
         double Total = 0;
-        for(IProduct product : items){
+        for(IProduct product : getProduct()){
             Total+=getSubTotal(product);
         }
         return Total;
     }
 
-    public boolean checkItemsAvailable(String item) {
+    public boolean isItemAvailable(String item) {
         int stock = 8;
-        return getProduct().stream().anyMatch((s) -> s.getProductName().equals(item)
+        return getProduct().stream().anyMatch((s) -> s.getName().equals(item)
                 && s.getQuantity() <= stock);
     }
-
-    public boolean getPaymentStatus(double amountInWallet, double totalAmount){
-        EWallet wallet = new EWallet(amountInWallet);
-        if(wallet.getWalletBalance()>totalAmount){
-            return true;
-        }
-        return false;
-    }
-
-
 }

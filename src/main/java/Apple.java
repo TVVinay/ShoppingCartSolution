@@ -2,16 +2,22 @@ public class Apple implements IProduct {
 
     private int quantity;
     private double amount;
-    private double subTotal;
-    private String name;
+    private String  name;
+    private Categories type;
 
 
-    public Apple(String name , int quantity, double amount) {
+    public Apple(String name ,Categories type, int quantity, double amount) {
         this.name = name;
         this.quantity = quantity;
         this.amount = amount;
+        this.type = type;
     }
 
+
+    public enum Categories{
+        FreshApple,
+        RedApple
+    }
 
     @Override
     public int getQuantity() {
@@ -25,7 +31,8 @@ public class Apple implements IProduct {
     }
 
     @Override
-    public String getProductName() {
+    public String getName() {
         return name;
     }
+
 }
