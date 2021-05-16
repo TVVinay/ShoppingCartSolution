@@ -26,7 +26,7 @@ public class EWallet implements IEWallet{
        }
     }
 
-    public boolean getPaymentStatus(double totalAmount){
+    public boolean hasSufficientBalance(double totalAmount){
         return getWalletBalance() > totalAmount;
 
     }

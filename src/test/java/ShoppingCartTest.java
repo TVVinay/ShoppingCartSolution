@@ -92,7 +92,7 @@ public class ShoppingCartTest {
         double totalAmount = shoppingCart.getTotalAmount();
         System.out.println("Total Amount Payble is : "+totalAmount);
 
-        boolean paymentStatus = wallet.getPaymentStatus(totalAmount);
+        boolean paymentStatus = wallet.hasSufficientBalance(totalAmount);
         wallet.deductAmount(totalAmount);
         System.out.println("Payment Status from eWallet is : " + paymentStatus);
 
